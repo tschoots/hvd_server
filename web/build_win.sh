@@ -1,0 +1,1 @@
+rm -rf a-frame_server.exe;CGO_ENABLED=0 go build -a --installsuffix cgo --ldflags="-s" -o a-frame_server.exe
