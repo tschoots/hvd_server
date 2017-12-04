@@ -2,7 +2,7 @@
 
 _GO_VERSION=1.9.2
 _IMAGE='maiastra/hvd_server'
-__TAG='0.1'
+_TAG='0.1'
 docker run --rm -v $(pwd):/usr/src/myapp -w /usr/src/myapp golang:$_GO_VERSION bash -c ./build.sh
 
 echo "building new image"

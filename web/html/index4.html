@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Wij als team</title>  
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/dist/rangeslider.css">
+    <style>
+        *,
+        *:before,
+        *:after {
+            -webkit-box-sizing: border-box;
+               -moz-box-sizing: border-box;
+                    box-sizing: border-box;
+        }
+        
+        .valueheading {
+        	-webkit-column-count: 3; /* chrome, safari, opera */
+        	-moz-column-count: 3; /* firefox */
+        	column-count: 3;
+        	
+        }
+        
+        
+
+        html {
+            color: #404040;
+            font-family: Helvetica, arial, sans-serif;
+        }
+        body {
+        	color: grey;                  /* variable color */
+        	background-color: yellow;
+            padding: 50px 20px;
+            margin: 0 auto;
+            max-width: 800px;
+        }
+
+        output {
+            display: block;
+            font-size: 30px;
+            font-weight: bold;
+            text-align: center;
+            margin: 30px 0;
+            width: 100%;
+        }
+
+        .u-left {
+            float: left;
+        }
+
+        .u-cf:before,
+        .u-cf:after {
+            content: "";
+            display: table;
+        }
+        .u-cf:after {
+            clear: both;
+        }
+
+        .u-text-left {
+            text-align: left;
+        }
+    </style>
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+	<div id="js-example-change-attributes">
+		<h1 align="middle">Binding:</h1>
+        <h2 align="middle">Hoe is onze onderlinge binding?</h2>
+        
+        <table width="100%" >
+        	<tr>
+	        <td align="left"><h6>ieder voor zich</h6></td>
+	        <td align="middle"><h6>echt onderling betrokken</h6></td>
+	        <td align="right"><h6>een hechte familie</h6></td>
+	        </tr>
+        </table>
+        <div class="valueheading">
+        	
+	        <!-- <h6 align="left">ieder voor zich</h6>
+	        <h6 align="middle">echt onderling betrokken</h6>
+	        <h6 align="right">een hechte familie</h6>-->
+        </div>
+        <input type="range" min="-5" max="5" step="1" data-rangeslider>
+        <output></output>
+       
+        <br><br>
+        <button>next</button>
+    </div>
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="/dist/rangeslider.min.js"></script>
+    
+    <script type="text/javascript">
+    $(function() {
+
+        var $document = $(document);
+        var selector = '[data-rangeslider]';
+        var $element = $(selector);
+
+        // For ie8 support
+        var textContent = ('textContent' in document) ? 'textContent' : 'innerText';
+
+        // Example functionality to demonstrate a value feedback
+        function valueOutput(element) {
+            var value = element.value;
+            var output = element.parentNode.getElementsByTagName('output')[0] || element.parentNode.parentNode.getElementsByTagName('output')[0];
+            output[textContent] = value;
+        }
+
+        $document.on('input', 'input[type="range"], ' + selector, function(e) {
+            valueOutput(e.target);
+        });
+        
+        
+     // Basic rangeslider initialization
+        $element.rangeslider({
+
+            // Deactivate the feature detection
+            polyfill: false,
+
+            // Callback function
+            onInit: function() {
+                valueOutput(this.$element[0]);
+            },
+
+            // Callback function
+            onSlide: function(position, value) {
+                console.log('onSlide');
+                console.log('position: ' + position, 'value: ' + value);
+            },
+
+            // Callback function
+            onSlideEnd: function(position, value) {
+                console.log('onSlideEnd');
+                console.log('position: ' + position, 'value: ' + value);
+            }
+        });
+    });
+    </script>
+
+</body>
+</html>

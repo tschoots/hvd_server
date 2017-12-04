@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_mDomkNEMEeeDPp2HM2ZVLg" name="hvd_server">
+  <packageImport xmi:type="uml:PackageImport" xmi:id="_mO2_INEMEeeDPp2HM2ZVLg">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Package" xmi:id="_XAapkNENEeeDPp2HM2ZVLg" name="Use Case View">
+    <ownedComment xmi:type="uml:Comment" xmi:id="_s9MHcNFQEeeDPp2HM2ZVLg">
+      <body>The description of an architecture is illustrated using a small set of use cases, or scenarios, which become a fifth view. The scenarios describe sequences of interactions between objects and between processes. They are used to identify architectural elements and to illustrate and validate the architecture design. They also serve as a starting point for tests of an architecture prototype. This view is also known as the use case view.</body>
+    </ownedComment>
+    <packagedElement xmi:type="uml:Actor" xmi:id="_FRy60NFREeeDPp2HM2ZVLg" name="Instructor">
+      <ownedComment xmi:type="uml:Comment" xmi:id="_Kxrq8NFREeeDPp2HM2ZVLg">
+        <body>somebody who gives the training</body>
+      </ownedComment>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Actor" xmi:id="_LZobwNFREeeDPp2HM2ZVLg" name="Student">
+      <ownedComment xmi:type="uml:Comment" xmi:id="_OmNsgNFREeeDPp2HM2ZVLg">
+        <body>Somebody following the course</body>
+      </ownedComment>
+    </packagedElement>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_fzScgNFREeeDPp2HM2ZVLg" name="Request a training"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_a3GAMNENEeeDPp2HM2ZVLg" name="Logical View">
+    <ownedComment xmi:type="uml:Comment" xmi:id="_1KPBYNFQEeeDPp2HM2ZVLg">
+      <body>The logical view is concerned with the functionality that the system provides to end-users. UML diagrams used to represent the logical view include, class diagrams, and state diagrams.</body>
+    </ownedComment>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_j-aKANENEeeDPp2HM2ZVLg" name="Development View">
+    <ownedComment xmi:type="uml:Comment" xmi:id="_w9LLENFQEeeDPp2HM2ZVLg">
+      <body>The development view illustrates a system from a programmer's perspective and is concerned with software management. This view is also known as the implementation view. It uses the UML Component diagram to describe system components. UML Diagrams used to represent the development view include the Package diagram</body>
+    </ownedComment>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_n5AXUNENEeeDPp2HM2ZVLg" name="Process View">
+    <ownedComment xmi:type="uml:Comment" xmi:id="_84lNINFQEeeDPp2HM2ZVLg">
+      <body>The process view deals with the dynamic aspects of the system, explains the system processes and how they communicate, and focuses on the runtime behavior of the system. The process view addresses concurrency, distribution, integrators, performance, and scalability, etc. UML diagrams to represent process view include the activity diagram.</body>
+    </ownedComment>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_zENrgNENEeeDPp2HM2ZVLg" name="Physical View">
+    <ownedComment xmi:type="uml:Comment" xmi:id="_4x4dgNFQEeeDPp2HM2ZVLg">
+      <body>The physical view depicts the system from a system engineer's point of view. It is concerned with the topology of software components on the physical layer as well as the physical connections between these components. This view is also known as the deployment view. UML diagrams used to represent the physical view include the deployment diagram</body>
+    </ownedComment>
+  </packagedElement>
+</uml:Model>

@@ -6,8 +6,8 @@ MAINTAINER Ton Schoots <ton@maiastra.com>
 EXPOSE 8080
 
 WORKDIR /
-COPY a-frame_web_server /
-COPY a-frame /a-frame
-COPY templates /templates
+COPY hvd_web_server /
+COPY html /html
+#COPY templates /templates
 
-ENTRYPOINT ["./a-frame_web_server"]
+ENTRYPOINT ["./hvd_web_server"]
