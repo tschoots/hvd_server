@@ -149,23 +149,40 @@ hr {
     update();
 
     function submitVotes() {
-        var votesForm = document.createElement('FORM');
-        votesForm.name = 'votes';
-        votesForm.method = 'POST';
-        // Adjust with your own URL
-        votesForm.action = 'results.html';
-
-        var hiddenInput;
         var arrayLength = counter.length;
+        var xhrPayload = {};
     	for (var i = 0; i<arrayLength;i++) {
-            hiddenInput = document.createElement('INPUT');
-            hiddenInput.type = 'hidden';
-            hiddenInput.name = i;
-            hiddenInput.value = counter[i];
-            votesForm.appendChild(hiddenInput);
+            xhrPayload[i] = counter[i];
     	}
-        document.body.appendChild(votesForm);
-        votesForm.submit();
+        var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
+        xmlhttp.open("POST", "results");
+        xmlhttp.setRequestHeader("Content-Type", "application/json");
+        xmlhttp.send(JSON.stringify(xhrPayload));
+        xmlhttp.onload = function () {
+            // Replace with custom logic
+            alert('Your votes have been submitted');
+        };
+
+        /**
+        * This login is using a custom <form>
+        */
+        // var votesForm = document.createElement('FORM');
+        // votesForm.name = 'votes';
+        // votesForm.method = 'POST';
+        // // Adjust with your own URL
+        // votesForm.action = 'results.html';
+        //
+        // var hiddenInput;
+        // var arrayLength = counter.length;
+    	// for (var i = 0; i<arrayLength;i++) {
+        //     hiddenInput = document.createElement('INPUT');
+        //     hiddenInput.type = 'hidden';
+        //     hiddenInput.name = i;
+        //     hiddenInput.value = counter[i];
+        //     votesForm.appendChild(hiddenInput);
+    	// }
+        // document.body.appendChild(votesForm);
+        // votesForm.submit();
     }
   </script>
 
