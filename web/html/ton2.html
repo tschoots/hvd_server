@@ -46,38 +46,38 @@ hr {
 <div class="header">
   <h2 id="votes">votes left : 5</h2>
   <button onclick="resetVotes()">reset votes</button>
-  <button>submit</button>
+  <button onclick="submitVotes()">submit</button>
 </div>
 
 <div class="flex-container">
   <div id=0></div>
   <div></div>
-  <div id=1></div>  
+  <div id=1></div>
 </div>
 <div class="flex-container">
   <div></div>
   <div id=2></div>
-  <div></div>  
+  <div></div>
 </div>
 <div class="flex-container">
   <div id=3></div>
   <div id=4></div>
-  <div id=5></div>  
+  <div id=5></div>
 </div>
 
  <script>
- 
+
  	var maxVotes = 5;
- 
+
     var questions = [
-    	"communicatie en overleg",    
+    	"communicatie en overleg",
     	"doordenking",
     	"positie en resultaat",
     	"heldere procedures naleving van afspraken",
     	"snelheid en besluitvaardigheid",
-    	"onderling vertrouwen"    	
+    	"onderling vertrouwen"
     ];
-    
+
     var counter = [
     	0,
     	0,
@@ -86,7 +86,7 @@ hr {
     	0,
     	0
     ];
-    
+
     var totalVotes = 0;
 
     function getQuestionBlockHtml(question, questionId) {
@@ -124,7 +124,7 @@ hr {
       document.getElementById('vote-count-' + questionId).innerHTML = counter[questionId];
       document.getElementById("votes").innerHTML = 'votes left : ' + (maxVotes - totalVotes);
     }
-    
+
     function update() {
     	var arrayLength = questions.length;
         for (var i = 0; i<arrayLength; i++){
@@ -135,7 +135,7 @@ hr {
         	document.getElementById("votes").innerHTML = 'votes left : ' + (maxVotes - totalVotes);
         }
     }
-    
+
     function resetVotes() {
     	totalVotes = 0;
     	var arrayLength = counter.length;
@@ -145,8 +145,28 @@ hr {
     	}
     	update();
     }
-    
+
     update();
+
+    function submitVotes() {
+        var votesForm = document.createElement('FORM');
+        votesForm.name = 'votes';
+        votesForm.method = 'POST';
+        // Adjust with your own URL
+        votesForm.action = 'results.html';
+
+        var hiddenInput;
+        var arrayLength = counter.length;
+    	for (var i = 0; i<arrayLength;i++) {
+            hiddenInput = document.createElement('INPUT');
+            hiddenInput.type = 'hidden';
+            hiddenInput.name = i;
+            hiddenInput.value = counter[i];
+            votesForm.appendChild(hiddenInput);
+    	}
+        document.body.appendChild(votesForm);
+        votesForm.submit();
+    }
   </script>
 
 </body>
