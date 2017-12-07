@@ -14,7 +14,6 @@
   height: 27vh;
   margin: 10px;
   text-align: center;
-  line-height: 75px;
   font-size: 30px;
 }
 hr {
@@ -31,6 +30,13 @@ hr {
   width: 30%;
   font-size: 40px;
 }
+.vote-count {
+  margin: 0 10px;
+}
+.vote {
+  height: 40px;
+  width: 40px;
+}
 </style>
 </head>
 <body>
@@ -40,38 +46,38 @@ hr {
 <div class="header">
   <h2 id="votes">votes left : 5</h2>
   <button onclick="resetVotes()">reset votes</button>
-  <button>submit</button>
+  <button onclick="submitVotes()">submit</button>
 </div>
 
 <div class="flex-container">
-  <div id=0 onclick="myFunction()"></div>
+  <div id=0></div>
   <div></div>
-  <div id=1 onclick="myFunction()"></div>  
+  <div id=1></div>
 </div>
 <div class="flex-container">
   <div></div>
-  <div id=2 onclick="myFunction()"></div>
-  <div></div>  
+  <div id=2></div>
+  <div></div>
 </div>
 <div class="flex-container">
-  <div id=3 onclick="myFunction()"></div>
-  <div id=4 onclick="myFunction()"></div>
-  <div id=5 onclick="myFunction()"></div>  
+  <div id=3></div>
+  <div id=4></div>
+  <div id=5></div>
 </div>
 
  <script>
- 
+
  	var maxVotes = 5;
- 
+
     var questions = [
-    	"communicatie en overleg",    
+    	"communicatie en overleg",
     	"doordenking",
     	"positie en resultaat",
     	"heldere procedures naleving van afspraken",
     	"snelheid en besluitvaardigheid",
-    	"onderling vertrouwen"    	
+    	"onderling vertrouwen"
     ];
-    
+
     var counter = [
     	0,
     	0,
@@ -80,43 +86,104 @@ hr {
     	0,
     	0
     ];
-    
+
     var totalVotes = 0;
-    
-    
-    
+
+    function getQuestionBlockHtml(question, questionId) {
+      var html = '';
+      html += '<h4>' + question + '</h4>';
+      html += '<div class="vote-container">';
+      html += '<button class="vote vote-minus" onclick="removeVote(' + questionId + ')">-</button>';
+      html += '<span id="vote-count-' + questionId + '" class="vote-count">0</span>';
+      html += '<button class="vote vote-plus" onclick="addVote(' + questionId + ')">+</button>';
+      html += '</div<';
+      return html;
+    }
+
+    function addVote(questionId) {
+      if ( totalVotes < maxVotes ){
+    		totalVotes++;
+        counter[questionId]++;
+        updateVotes(questionId);
+    	} else {
+    		alert("Maximum votes reached")
+    	}
+    }
+
+    function removeVote(questionId) {
+      if ( counter[questionId] > 0 && totalVotes > 0){
+        totalVotes--;
+        counter[questionId]--;
+        updateVotes(questionId);
+    	} else {
+    		alert("Zero votes reached")
+    	}
+    }
+
+    function updateVotes(questionId) {
+      document.getElementById('vote-count-' + questionId).innerHTML = counter[questionId];
+      document.getElementById("votes").innerHTML = 'votes left : ' + (maxVotes - totalVotes);
+    }
+
     function update() {
     	var arrayLength = questions.length;
         for (var i = 0; i<arrayLength; i++){
-        	document.getElementById(i).innerHTML = questions[i]; 
+          var questionBlock = document.getElementById(i);
+        	questionBlock.innerHTML = (function(index){
+            return getQuestionBlockHtml(questions[index], index);
+          })(i);
         	document.getElementById("votes").innerHTML = 'votes left : ' + (maxVotes - totalVotes);
         }
-    	
     }
- 
-    function myFunction() {
-    	if ( totalVotes < maxVotes ){
-    		totalVotes++;
-    	    var i = event.srcElement.id;
-    	    counter[i]++;
-    	    document.getElementById(i).innerHTML = questions[i] + '<hr>' + counter[i]; 
-    	    document.getElementById("votes").innerHTML = 'votes left : ' + (maxVotes - totalVotes);
-    	}else {
-    		alert("maximum votes reached")
-    	}
-      
-    }
-    
+
     function resetVotes() {
     	totalVotes = 0;
     	var arrayLength = counter.length;
     	for (var i = 0; i<arrayLength;i++) {
+        document.getElementById('vote-count-' + i).innerHTML = 0;
     		counter[i] = 0;
     	}
     	update();
     }
-    
+
     update();
+
+    function submitVotes() {
+        var arrayLength = counter.length;
+        var xhrPayload = {};
+    	for (var i = 0; i<arrayLength;i++) {
+            xhrPayload[i] = counter[i];
+    	}
+        var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
+        xmlhttp.open("POST", "results");
+        xmlhttp.setRequestHeader("Content-Type", "application/json");
+        xmlhttp.send(JSON.stringify(xhrPayload));
+        xmlhttp.onload = function () {
+            // Replace with custom logic
+            alert('Your votes have been submitted');
+        };
+
+        /**
+        * This login is using a custom <form>
+        */
+        // var votesForm = document.createElement('FORM');
+        // votesForm.name = 'votes';
+        // votesForm.method = 'POST';
+        // // Adjust with your own URL
+        // votesForm.action = 'results.html';
+        //
+        // var hiddenInput;
+        // var arrayLength = counter.length;
+    	// for (var i = 0; i<arrayLength;i++) {
+        //     hiddenInput = document.createElement('INPUT');
+        //     hiddenInput.type = 'hidden';
+        //     hiddenInput.name = i;
+        //     hiddenInput.value = counter[i];
+        //     votesForm.appendChild(hiddenInput);
+    	// }
+        // document.body.appendChild(votesForm);
+        // votesForm.submit();
+    }
   </script>
 
 </body>
