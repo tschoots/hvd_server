@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  background-color: DodgerBlue;
+}
+
+.flex-container>div {
+  background-color: #f1f1f1;
+  width: 33%;
+  height: 27vh;
+  margin: 10px;
+  text-align: center;
+  line-height: 75px;
+  font-size: 30px;
+}
+hr {
+  visibility: hidden;
+}
+.header {
+  display: flex;
+}
+.header h2 {
+  flex-grow: 1;
+}
+.header button {
+  margin-left: 20px;
+  width: 30%;
+  font-size: 40px;
+}
+</style>
+</head>
+<body>
+
+<h2 align="center">Waar moeten jullie als team in investeren?</h2>
+
+<div class="header">
+  <h2 id="votes">votes left : 5</h2>
+  <button onclick="resetVotes()">reset votes</button>
+  <button>submit</button>
+</div>
+
+<div class="flex-container">
+  <div id=0 onclick="myFunction()"></div>
+  <div></div>
+  <div id=1 onclick="myFunction()"></div>  
+</div>
+<div class="flex-container">
+  <div></div>
+  <div id=2 onclick="myFunction()"></div>
+  <div></div>  
+</div>
+<div class="flex-container">
+  <div id=3 onclick="myFunction()"></div>
+  <div id=4 onclick="myFunction()"></div>
+  <div id=5 onclick="myFunction()"></div>  
+</div>
+
+ <script>
+ 
+ 	var maxVotes = 5;
+ 
+    var questions = [
+    	"communicatie en overleg",    
+    	"doordenking",
+    	"positie en resultaat",
+    	"heldere procedures naleving van afspraken",
+    	"snelheid en besluitvaardigheid",
+    	"onderling vertrouwen"    	
+    ];
+    
+    var counter = [
+    	0,
+    	0,
+    	0,
+    	0,
+    	0,
+    	0
+    ];
+    
+    var totalVotes = 0;
+    
+    
+    
+    function update() {
+    	var arrayLength = questions.length;
+        for (var i = 0; i<arrayLength; i++){
+        	document.getElementById(i).innerHTML = questions[i]; 
+        	document.getElementById("votes").innerHTML = 'votes left : ' + (maxVotes - totalVotes);
+        }
+    	
+    }
+ 
+    function myFunction() {
+    	if ( totalVotes < maxVotes ){
+    		totalVotes++;
+    	    var i = event.srcElement.id;
+    	    counter[i]++;
+    	    document.getElementById(i).innerHTML = questions[i] + '<hr>' + counter[i]; 
+    	    document.getElementById("votes").innerHTML = 'votes left : ' + (maxVotes - totalVotes);
+    	}else {
+    		alert("maximum votes reached")
+    	}
+      
+    }
+    
+    function resetVotes() {
+    	totalVotes = 0;
+    	var arrayLength = counter.length;
+    	for (var i = 0; i<arrayLength;i++) {
+    		counter[i] = 0;
+    	}
+    	update();
+    }
+    
+    update();
+  </script>
+
+</body>
+</html>
